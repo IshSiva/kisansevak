@@ -1,11 +1,3 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-"""
-Created on Sun Feb 10 14:57:31 2019
-
-@author: ish
-"""
-
 from flask import Flask,request,jsonify
 
 import numpy as np
@@ -15,10 +7,10 @@ import os
 
 app = Flask(__name__)
 
-model = pickle.load(open("label_powerset_model.pkl", "rb"))
+model = pickle.load(open("label_pst.pkl", "rb"))
 ind_to_crop_dict = pickle.load(open("index-to-crop.pkl", "rb"))
 
-@app.route('/getPrediction', methods=['GET'])
+@app.route('/', methods=['GET'])
 def index():
     state = request.args.get('state')
     district=request.args.get('district')
