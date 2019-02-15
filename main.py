@@ -9,16 +9,23 @@ app = Flask(__name__)
 
 model = pickle.load(open("label_pst.pkl", "rb"))
 ind_to_crop_dict = pickle.load(open("index-to-crop.pkl", "rb"))
+district_dict = pickle.load(open("district.pkl", "rb"))
 
 @app.route('/', methods=['GET'])
 def index():
     state = request.args.get('state')
     district=request.args.get('district')
+    
+    if district in district_dict:
+        district_val = district_dict[district]
+    else:
+        district_val = 0
+        
     #print(district)
     season=request.args.get('season')
     #print(season)
     
-    lst = [[state, district, season]]
+    lst = [[state, district_val, season]]
     arr = np.asarray(lst, dtype=int)
     
     #print(type(arr))
